@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+// 2025
+// By Pedro henrique garcia.
+// Github/gitlab: Phkaiser13
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<!--
+    Este é o arquivo que define a estrutura da nossa UI de Login.
+    - fx:controller: Este é o elo crucial que conecta este arquivo de visão
+      com a sua classe de lógica, o LoginController.
+    - VBox: É um contêiner que organiza todos os seus "filhos" (outros nós)
+      em uma única coluna vertical. Perfeito para um formulário.
+-->
+<VBox fx:controller="com.logncad.controller.LoginController"
+      alignment="TOP_CENTER" spacing="15.0"
+      style="-fx-background-color: #2c3e50;"
+      xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+    <padding>
+        <Insets bottom="20.0" left="40.0" right="40.0" top="20.0"/>
+    </padding>
+
+    <!-- Um título para a nossa tela. -->
+    <Label text="LognCad" textFill="white">
+        <font>
+            <Font name="Arial Bold" size="36.0"/>
+        </font>
+        <VBox.margin>
+            <Insets bottom="10.0"/>
+        </VBox.margin>
+    </Label>
+
+    <!-- Campo de texto para o nome de usuário. -->
+    <!-- fx:id é o identificador que usaremos no Controller para obter este campo. -->
+    <!-- promptText é o texto de placeholder que aparece quando o campo está vazio. -->
+    <TextField fx:id="usernameField" promptText="Nome de Usuário"/>
+
+    <!-- Campo específico para senhas. O texto digitado é automaticamente mascarado. -->
+    <PasswordField fx:id="passwordField" promptText="Senha"/>
+
+    <!-- Label para exibir mensagens de feedback (sucesso ou erro) ao usuário. -->
+    <Label fx:id="feedbackLabel" textFill="#e74c3c" wrapText="true"/>
+
+    <!-- O botão principal de ação. -->
+    <!-- onAction aponta para o método no Controller que será executado quando o botão for clicado. -->
+    <Button fx:id="loginButton" maxWidth="Infinity" onAction="#handleLogin" text="Entrar"
+            style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold;"/>
+
+    <!-- Um link para navegar para a tela de cadastro. -->
+    <Hyperlink onAction="#handleSwitchToRegister" text="Não tem uma conta? Cadastre-se" textFill="white"/>
+
+</VBox>
