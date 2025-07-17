@@ -1,4 +1,4 @@
-﻿# LognCad: Documento de Visão e Arquitetura v1.0
+# LognCad: Documento de Visão e Arquitetura v1.0
 
 **Autor:** Pedro Henrique Garcia (phkaiser13)
 **Data:** 2025

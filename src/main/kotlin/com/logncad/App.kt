@@ -1,4 +1,4 @@
-﻿// 2025
+// 2025
 // By Pedro henrique garcia.
 // Github/gitlab: Phkaiser13
 
@@ -23,14 +23,26 @@ import java.net.URL
  */
 class App : Application() {
 
-    // companion object é o lar de membros que pertencem à classe, não a instâncias dela,
-    // semelhante ao 'static' em Java.
+    // companion object é o lar de membros que pertencem à classe, não a instâncias dela.
+    // É o local ideal para o ponto de entrada da aplicação (a função 'main').
     companion object {
         // Tornamos o authService acessível globalmente de uma forma simples.
-        // Em aplicações maiores, usaríamos um framework de Injeção de Dependência
-        // (como Guice, Dagger ou Koin), mas para este escopo, isso é suficiente e claro.
-        // O 'lateinit' nos permite declarar uma propriedade não-nula que será inicializada depois.
         lateinit var authService: AuthService
+
+        /**
+         * O ponto de entrada (main) da nossa aplicação.
+         * A anotação @JvmStatic é crucial aqui. Ela instrui o compilador Kotlin a gerar um
+         * método 'public static void main(String[] args)' real na classe 'App', que é
+         * o formato que a JVM e o JavaFX procuram para iniciar a execução.
+         *
+         * @param args Argumentos da linha de comando, que passamos para o JavaFX.
+         */
+        @JvmStatic
+        fun main(args: Array<String>) {
+            // Delega o lançamento da aplicação para o framework JavaFX.
+            // Passamos a nossa classe 'App' e os argumentos recebidos.
+            launch(App::class.java, *args)
+        }
     }
 
     /**
@@ -53,33 +65,16 @@ class App : Application() {
      * @param primaryStage O palco principal fornecido pelo framework JavaFX.
      */
     override fun start(primaryStage: Stage) {
-        // Carregamos a nossa visão (a UI) de um arquivo FXML.
-        // Separar a UI (FXML) da lógica (Controller/App) é uma prática fundamental
-        // para manter o código organizado.
-        val fxmlUrl: URL = App::class.java.getResource("view/LoginView.fxml")
-            ?: throw IllegalStateException("Arquivo FXML não encontrado.")
+        // O caminho para o nosso arquivo de layout FXML.
+        // A barra "/" no início indica que o caminho é a partir da raiz do 'resources'.
+        val fxmlUrl: URL = App::class.java.getResource("/com/logncad/view/LoginView.fxml")
+            ?: throw IllegalStateException("Arquivo FXML não encontrado. Verifique o caminho em src/main/resources.")
 
         val root: Parent = FXMLLoader.load(fxmlUrl)
 
-        // Título da janela da nossa aplicação.
         primaryStage.title = "LognCad - Autenticação"
-
-        // Criamos a "cena" com o conteúdo carregado do FXML e a colocamos no "palco".
-        primaryStage.scene = Scene(root, 350.0, 400.0) // Definimos um tamanho inicial
-
-        // Impede o usuário de redimensionar a janela, para manter o layout consistente.
+        primaryStage.scene = Scene(root, 350.0, 400.0)
         primaryStage.isResizable = false
-
-        // Exibe o palco para o usuário.
         primaryStage.show()
     }
-}
-
-/**
- * A função 'main' que serve como ponto de entrada para a JVM.
- * No Kotlin, ela pode ficar fora de uma classe. Ela simplesmente delega o lançamento
- * da aplicação para o framework JavaFX.
- */
-fun main() {
-    Application.launch(App::class.java)
 }

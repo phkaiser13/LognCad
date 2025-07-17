@@ -1,0 +1,65 @@
+/*
+// 2025
+// By Pedro henrique garcia.
+// Github/gitlab: Phkaiser13
+*/
+
+/* O seletor .root aplica-se ao elemento raiz do nosso FXML que tem o styleClass="root" */
+.root {
+    -fx-background-color: #2D3748; /* Um fundo cinza-azulado escuro */
+    -fx-font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* Estilo para todos os rótulos */
+.label {
+    -fx-text-fill: #A0AEC0; /* Texto cinza claro para contraste */
+}
+
+/* Estilo específico para o título principal */
+.title-label {
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #FFFFFF; /* Texto branco */
+}
+
+/* Estilizando os campos de texto e senha */
+.text-field, .password-field {
+    -fx-background-color: #1A202C; /* Fundo do campo bem escuro */
+    -fx-text-fill: #E2E8F0; /* Cor do texto digitado */
+    -fx-prompt-text-fill: #718096; /* Cor do texto de dica (prompt) */
+    -fx-background-radius: 5; /* Bordas arredondadas */
+    -fx-border-color: #4A5568;
+    -fx-border-radius: 5;
+}
+
+/* O botão primário de ação */
+.primary-button {
+    -fx-background-color: #3182CE; /* Azul vibrante */
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5;
+    -fx-pref-width: 290; /* Largura preferencial */
+    -fx-pref-height: 35;
+}
+.primary-button:hover {
+    -fx-background-color: #2B6CB0; /* Azul mais escuro ao passar o mouse */
+    -fx-cursor: hand; /* Muda o cursor para a "mãozinha" */
+}
+
+/* Estilizando o Hyperlink para combinar com o tema */
+.hyperlink {
+    -fx-text-fill: #63B3ED;
+    -fx-border-color: transparent; /* Remove a sublinha padrão feia */
+}
+.hyperlink:hover {
+    -fx-text-fill: #90CDF4;
+}
+
+/* Estilos para o rótulo de feedback */
+.feedback-success {
+    -fx-text-fill: #48BB78; /* Verde para sucesso */
+}
+
+.feedback-error {
+    -fx-text-fill: #F56565; /* Vermelho para erro */
+}

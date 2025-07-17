@@ -1,8 +1,45 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.layout.VBox?>
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+// 2025
+// By Pedro henrique garcia.
+// Github/gitlab: Phkaiser13
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.layout.VBox?>
+
+<!-- O controlador agora aponta para o nosso novo RegisterController -->
 <VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.logncad.controller.RegisterController"
-      alignment="CENTER" spacing="20.0" style="-fx-background-color: #2c3e50;">
-    <Label text="Tela de Registro em Breve!" textFill="white" />
+      alignment="TOP_CENTER" spacing="15" styleClass="root">
+
+    <padding>
+        <Insets top="40" right="30" bottom="30" left="30"/>
+    </padding>
+
+    <Label text="Crie sua Conta" styleClass="title-label"/>
+    <Label fx:id="feedbackLabel"/>
+
+    <TextField fx:id="usernameField" promptText="Nome de usuário"/>
+    <PasswordField fx:id="passwordField" promptText="Senha"/>
+    <!-- Campo adicional para confirmar a senha -->
+    <PasswordField fx:id="confirmPasswordField" promptText="Confirmar senha"/>
+
+    <!-- O botão agora chama a função handleRegister -->
+    <Button text="Cadastrar" onAction="#handleRegister" defaultButton="true" styleClass="primary-button"/>
+
+    <!-- O hyperlink agora volta para a tela de login -->
+    <Hyperlink text="Já tem uma conta? Faça o login" onAction="#handleSwitchToLogin"/>
+
+    <stylesheets>
+        <!-- Reutilizamos a mesma folha de estilo para manter a consistência visual -->
+        <url value="@style.css"/>
+    </stylesheets>
+
 </VBox>

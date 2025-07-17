@@ -1,4 +1,4 @@
-﻿// 2025
+// 2025
 // By Pedro henrique garcia.
 // Github/gitlab: Phkaiser13
 
@@ -6,28 +6,19 @@ package com.logncad.controller
 
 import com.logncad.App
 import com.logncad.service.AuthResult
+import com.logncad.util.Navigator // Importe o Navigator
 import javafx.fxml.FXML
-import javafx.fxml.FXMLLoader
-import javafx.scene.Parent
-import javafx.scene.Scene
-import javafx.scene.control.*
-import javafx.scene.paint.Color
-import javafx.stage.Stage
-import java.io.IOException
+import javafx.scene.control.Label
+import javafx.scene.control.PasswordField
+import javafx.scene.control.TextField
 
 /**
- * Controla a lógica da tela de login (LoginView.fxml).
- * Suas responsabilidades são:
- * - Capturar a entrada do usuário (nome de usuário e senha).
- * - Invocar o AuthService para processar a tentativa de login.
- * - Atualizar a UI com feedback (mensagens de erro, transição de tela).
- * - Navegar para outras telas (Registro, Tela de Boas-Vindas).
+ * O Controller para a LoginView.fxml.
+ * Sua responsabilidade é lidar com as interações do usuário (cliques, digitação)
+ * na tela de login, comunicar-se com a camada de serviço e atualizar a UI com o resultado.
  */
 class LoginController {
 
-    // A anotação @FXML é usada para injetar os componentes definidos no arquivo FXML
-    // diretamente nestas propriedades. O nome da propriedade DEVE ser o mesmo do 'fx:id'.
-    // 'lateinit' indica que a variável será inicializada mais tarde (pelo FXMLLoader).
     @FXML
     private lateinit var usernameField: TextField
 
@@ -37,78 +28,51 @@ class LoginController {
     @FXML
     private lateinit var feedbackLabel: Label
 
-    /**
-     * Este método é chamado pelo framework JavaFX quando o FXML é carregado, mas ANTES da UI
-     * ser exibida. É um bom lugar para configurar o estado inicial dos componentes.
-     */
-    @FXML
-    fun initialize() {
-        // Garante que o label de feedback comece vazio e invisível.
-        feedbackLabel.text = ""
-    }
 
     /**
-     * Manipula o evento de clique do botão "Entrar".
-     * Esta função é linkada através do atributo 'onAction="#handleLogin"' no FXML.
+     * Este método é acionado quando o usuário clica no botão "Entrar" ou pressiona Enter.
      */
     @FXML
     private fun handleLogin() {
         val username = usernameField.text
         val password = passwordField.text
 
-        // Delega a lógica de autenticação para o nosso serviço.
         val result = App.authService.login(username, password)
 
-        // O 'when' do Kotlin é perfeito para lidar com nossa sealed class AuthResult.
-        // Ele nos força a tratar todos os cenários, tornando nosso código mais seguro.
         when (result) {
             is AuthResult.Success -> {
-                // Login bem-sucedido!
-                println("Login bem-sucedido para o usuário: ${result.user.username}")
-                feedbackLabel.text = "Login efetuado com sucesso!"
-                feedbackLabel.textFill = Color.GREEN
-                // Em um app real, navegaríamos para a tela principal aqui.
-                // Exemplo: loadScene("MainDashboardView.fxml")
+                updateFeedback("Login bem-sucedido! Bem-vindo, ${result.user.username}.", isError = false)
+                // TODO: Em uma aplicação real, aqui navegaríamos para a próxima tela.
             }
             is AuthResult.Failure -> {
-                // Login falhou, exibe a mensagem de erro específica.
-                feedbackLabel.text = result.message
-                feedbackLabel.textFill = Color.web("#e74c3c") // Cor vermelha para erros
+                updateFeedback(result.message, isError = true)
             }
         }
     }
 
     /**
-     * Manipula o clique no hyperlink para navegar para a tela de registro.
+     * Este método é acionado quando o usuário clica no hyperlink "Cadastre-se".
+     * ESTA É A ÚNICA VERSÃO QUE DEVE EXISTIR DESTE MÉTODO.
      */
     @FXML
     private fun handleSwitchToRegister() {
-        println("Navegando para a tela de Registro...")
-        loadScene("RegisterView.fxml")
+        // Passamos o nome do arquivo FXML de destino e um nó da cena atual.
+        Navigator.navigateTo("RegisterView.fxml", usernameField)
     }
 
     /**
-     * Função utilitária para carregar e exibir uma nova cena (tela) na janela atual.
-     * Isso nos permite trocar de tela (ex: de Login para Registro) de forma limpa.
-     *
-     * @param fxmlFile O nome do arquivo .fxml a ser carregado. Ex: "RegisterView.fxml"
+     * Uma função auxiliar para atualizar o rótulo de feedback na UI.
      */
-    private fun loadScene(fxmlFile: String) {
-        try {
-            val fxmlPath = "/com/logncad/view/$fxmlFile"
-            val url = javaClass.getResource(fxmlPath)
-                ?: throw IOException("Não foi possível encontrar o arquivo FXML: $fxmlFile")
+    private fun updateFeedback(message: String, isError: Boolean) {
+        feedbackLabel.text = message
+        feedbackLabel.styleClass.removeAll("feedback-success", "feedback-error")
 
-            val root: Parent = FXMLLoader.load(url)
-            // Para obter o Stage (a janela), pegamos a cena de qualquer componente
-            // já existente na tela e, a partir da cena, obtemos a janela.
-            val stage = usernameField.scene.window as Stage
-            stage.scene = Scene(root)
-            stage.show()
-        } catch (e: IOException) {
-            e.printStackTrace()
-            // Em um app real, mostraríamos um alerta de erro para o usuário.
-            feedbackLabel.text = "Erro ao carregar a tela."
+        if (message.isNotEmpty()) {
+            if (isError) {
+                feedbackLabel.styleClass.add("feedback-error")
+            } else {
+                feedbackLabel.styleClass.add("feedback-success")
+            }
         }
     }
 }

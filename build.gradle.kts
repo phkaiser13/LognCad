@@ -31,7 +31,7 @@ repositories {
 application {
     // Aqui definimos a classe principal que contém o método 'main', o ponto de entrada da nossa aplicação.
     // É crucial que este caminho corresponda à estrutura de pacotes que vamos criar.
-    mainClass.set("com.logncad.AppKt") // Usaremos um arquivo Kotlin App.kt como ponto de entrada
+    mainClass.set("com.logncad.App") // Usaremos um arquivo Kotlin App.kt como ponto de entrada
 }
 
 // Configurações específicas para o plugin do JavaFX.
