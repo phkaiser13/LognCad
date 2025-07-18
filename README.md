@@ -17,7 +17,7 @@
 * **Validação de Senha**: Verifica se a senha e a confirmação de senha são idênticas no momento do cadastro.
 * **Navegação Centralizada**: Transição limpa e reutilizável entre as telas.
 * **Interface Estilizada**: O design da aplicação é customizado via CSS para uma aparência mais agradável.
-* **Persistência de Dados**: Os usuários são salvos localmente em um arquivo (`users.dat`), permitindo que os cadastros persistam entre as execuções do programa.
+* **Persistência de Dados**: Os usuários são salvos localmente em um arquivo protegido e criptografado nativamente, a famosa alternativa ao json "MessagePack", permitindo que os cadastros persistam entre as execuções do programa.
 
 ---
 
@@ -26,6 +26,7 @@
 * **Linguagem**: [Kotlin](https://kotlinlang.org/)
 * **Framework Gráfico**: [JavaFX](https://openjfx.io/)
 * **Gerenciador de Dependências**: [Gradle](https://gradle.org/)
+* * **Alternativa ao Json comum**: [MessagePack]
 * **IDE Recomendada**: [IntelliJ IDEA](https://www.jetbrains.com/idea/)
 
 ---
@@ -75,7 +76,7 @@ LognCad/
 
 1.  **Clone o repositório:**
     ```bash
-    git clone <url-do-seu-repositorio>
+    git clone <https://github.com/phkaiser13/LognCad.git>
     ```
 2.  **Abra o projeto no IntelliJ IDEA:**
     * Vá em `File > Open...` e selecione a pasta `LognCad` que você acabou de clonar.
@@ -97,12 +98,12 @@ A tela de login da aplicação deverá ser exibida.
 
 ---
 
-## 🌱 Possíveis Melhorias
+## 🌱 Possíveis Implementações/Adições
 
 Este projeto é uma base. Sinta-se à vontade para expandi-lo com novas funcionalidades:
 
 * [ ] Implementar um banco de dados (como H2, SQLite) em vez de salvar em arquivo.
-* [ ] Adicionar criptografia (hashing) para as senhas antes de salvá-las.
+* [ ] Adicionar criptografia adicional (como hashing) para as senhas antes de salvá-las.
 * [ ] Criar uma tela de "Boas-vindas" para ser exibida após o login bem-sucedido.
 * [ ] Implementar uma funcionalidade "Lembrar-me" na tela de login.
 * [ ] Adicionar mais validações nos campos de entrada (ex: e-mail válido, força da senha).
