@@ -63,3 +63,18 @@
 .feedback-error {
     -fx-text-fill: #F56565; /* Vermelho para erro */
 }
+/* O botão secundário, para ações como "Voltar" */
+.secondary-button {
+    -fx-background-color: transparent; /* Fundo transparente */
+    -fx-text-fill: #A0AEC0; /* Cor do texto igual aos labels */
+    -fx-border-color: #4A5568; /* Borda com a cor dos campos de texto */
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-pref-width: 290;
+    -fx-pref-height: 35;
+}
+.secondary-button:hover {
+    -fx-background-color: #4A5568; /* Fundo escuro ao passar o mouse */
+    -fx-text-fill: #FFFFFF; /* Texto branco ao passar o mouse */
+    -fx-cursor: hand;
+}

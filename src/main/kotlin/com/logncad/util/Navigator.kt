@@ -26,7 +26,7 @@ object Navigator {
      *
      * @param fxmlFile O nome do arquivo FXML a ser carregado (ex: "RegisterView.fxml").
      * @param currentNode Um nó qualquer da cena atual (como um botão ou campo de texto).
-     *                    Usamos este nó para obter uma referência à janela (Stage) atual.
+     * Usamos este nó para obter uma referência à janela (Stage) atual.
      */
     fun navigateTo(fxmlFile: String, currentNode: Node) {
         try {
