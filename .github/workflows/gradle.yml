@@ -1,0 +1,51 @@
+# 2025
+# By Pedro henrique garcia.
+# Github/gitlab: Phkaiser13
+
+# Nome do workflow que aparecerá na aba "Actions" do GitHub.
+name: Java CI with Gradle
+
+# Define os gatilhos (eventos) que iniciam este workflow.
+on:
+  # Executa no push para a branch 'main' (ou a sua principal).
+  push:
+    branches: [ "main" ]
+  # Executa em qualquer pull request direcionado à branch 'main'.
+  # Isso é ótimo para validar contribuições antes de mesclá-las.
+  pull_request:
+    branches: [ "main" ]
+
+# Define os "trabalhos" (jobs) a serem executados.
+# Podemos ter vários jobs que rodam em paralelo, mas aqui só precisamos de um.
+jobs:
+  # Nome do nosso job. Pode ser qualquer nome.
+  build:
+    # Define o tipo de máquina virtual que o job vai usar.
+    # 'ubuntu-latest' é uma escolha comum, rápida e gratuita.
+    runs-on: ubuntu-latest
+
+    # 'steps' são a sequência de tarefas que o job vai executar.
+    steps:
+      # 1. Baixa o código do seu repositório para a máquina virtual.
+      # 'uses' indica que estamos usando uma "Action" pré-construída.
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Configura o ambiente Java (JDK).
+      # Precisamos de uma versão compatível com o JavaFX que usamos (ex: 17 ou 21).
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin' # Uma distribuição popular e confiável do OpenJDK.
+
+      # 3. Valida o wrapper do Gradle para segurança.
+      - name: Validate Gradle wrapper
+        uses: gradle/actions/wrapper-validation@v3
+
+      # 4. O passo mais importante: Executa o build do Gradle.
+      # O comando 'build' compila todo o código (Java e Kotlin),
+      # executa os testes e monta os pacotes. Se qualquer passo falhar,
+      # o workflow inteiro falha, nos dando o "X" vermelho.
+      - name: Build with Gradle
+        run: ./gradlew build
