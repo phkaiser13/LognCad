@@ -5,12 +5,12 @@ name: Build do Projeto LognCad
 
 # Define os gatilhos (eventos) que iniciarão este workflow
 on:
-  # Roda quando um push é feito para a branch 'main'
+  # Roda quando um push é feito para a branch 'master'
   push:
-    branches: [ main ]
-  # Roda quando um pull request é aberto (ou atualizado) para a branch 'main'
+    branches: [ master ]
+  # Roda quando um pull request é aberto (ou atualizado) para a branch 'master'
   pull_request:
-    branches: [ main ]
+    branches: [ master ]
 
 # Define os "trabalhos" (jobs) que o workflow executará.
 # Podemos ter vários jobs, mas para compilar, um é suficiente.
