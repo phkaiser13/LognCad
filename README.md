@@ -1,6 +1,4 @@
-# LognCad - Sistema de Login e Cadastro em Kotlin e JavaFX
-
-![Tela de Cadastro do LognCad](https://i.imgur.com/uG9w79s.png)
+# LognCad - Sistema de Login e Cadastro Simples em Kotlin e JavaFX Usando MessagePack
 
 ## 📖 Sobre o Projeto
 
